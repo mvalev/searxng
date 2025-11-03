@@ -1,9 +1,14 @@
 from flask import request, jsonify, abort
 import os
+from timeit import default_timer
 
 def init_app(app):
     @app.before_request
     def authenticate_api():
+        # Initialize start_time for all requests to avoid AttributeError
+        if not hasattr(request, 'start_time'):
+            request.start_time = default_timer()
+        
         required_key = os.getenv('SEARXNG_API_KEY')
         if not required_key:
             return
