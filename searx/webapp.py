@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 """WebApp"""
 # pylint: disable=use-dict-literal
-
+from searx import api_auth
 import json
 import os
 import sys
@@ -151,6 +151,7 @@ app.jinja_env.lstrip_blocks = True
 app.jinja_env.add_extension('jinja2.ext.loopcontrols')  # pylint: disable=no-member
 app.jinja_env.filters['group_engines_in_tab'] = group_engines_in_tab  # pylint: disable=no-member
 app.secret_key = settings['server']['secret_key']
+api_auth.init_app(app)
 
 
 def get_locale():
