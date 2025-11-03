@@ -3,6 +3,7 @@
 """WebApp"""
 # pylint: disable=use-dict-literal
 from searx import api_auth
+
 import json
 import os
 import sys
@@ -1400,6 +1401,8 @@ def init():
 
     limiter.initialize(app, settings)
     favicons.init()
+    api_auth.init_app(app)  # ADD THIS LINE
+
 
 
 def static_headers(headers: Headers, _path: str, _url: str) -> None:
